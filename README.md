@@ -92,7 +92,7 @@ A instalação do CentOS 7 segue as premissas a seguir para todas instancias des
 
 - Particionamento:
   | Mount point | Size (MB) | Mount options |
-  | :---| :---: | : ----------|
+  | :--- | :---: | :--- |
   | swap | 1024 | |
   | /boot | 200 | defaults,ro |
   | / | 2856 | |
@@ -109,10 +109,11 @@ A instalação do CentOS 7 segue as premissas a seguir para todas instancias des
   | admin | 123456 |
 
 - Fuso horario, linguagem e layout de teclado:
-  | Para
-  Fuso: GMT -3 (Sao Paulo)
-  Linguagem: EN
-  Layout teclado: PT-BR ABNT2
+  | Parametro | Valor |
+  | :---: | :---: |
+  | Fuso | GMT -3 (Sao Paulo) |
+  | Linguagem SO | EN |
+  | Layout teclado | PT-BR ABNT2 |
 
 - [Script de configuração inicial](script-tools/centos7-default.sh)
 
