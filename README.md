@@ -81,12 +81,69 @@ Repositorio material utilizado no desafio.
   - IP Roteamento
   - IPSEC
     - Configuração (ipsec.conf)
+    - Script monitoramento (monitor.sh)
+    - crontab
   - Hardening and best practices
 
 
 ## PFSENSE
 
 ## CENTOS7
+A instalação do CentOS 7 segue as premissas a seguir para todas instancias desse desafio:
+
+- Particionamento:
+        # Mount point           Size (MB)       Mount options
+        /                       2000
+        /var                    2000
+        /var/log                512
+        /vat/tmp                                bind (/tmp)
+        /tmp                    512             nodev,nosuid,noexec
+        /home                   512             nodev        
+        /dev/shm                                nodev,nosuid,noexec
+        /boot                   200		        ro
+
+- Contas de usuário:
+        root:123456
+        admin:123456
+
+- Fuso horario, linguagem e layout de teclado:
+        Fuso: GMT -3 (Sao Paulo)
+        Linguagem: EN
+        Layout teclado: PT-BR ABNT2
+
+- [Script de configuração inicial](script-tools/centos7-default.sh)
+        Instalação ferramentas básicas:
+
+        ```
+        while read -r p ; do apt-get install -y $p ; done < <(cat << "EOF"
+            nano
+            bash-completion
+            net-tools
+            wget
+            curl
+            libwww-curl-perl
+            lsof
+        EOF
+        )
+        ```
+        Hardening serviço SSHD:
+
+        ```
+        while read -r p ; do echo $p >> /etc/ssh/sshd_config ; done < <(cat << "EOF"
+            "PermitRootLogin no"
+            "TCPKeepAlive no"
+            "PrintLastLog no"
+            "PrintMotd no"
+            "ClientAliveInterval 300"
+            "LoginGraceTime 30s"
+            "PermitEmptyPasswords no"
+            "HostbasedAuthentication no"
+            "MaxSessions 1"
+            "MaxAuthTries 3"
+            "PermitUserEnvironment no"
+        EOF
+        )
+        ```
 
 ## HAPROXY
 
