@@ -7,34 +7,34 @@ Repositorio material utilizado no desafio.
 
 ### Atividades por etapa:
 
-- 1xx - pfSense (firewall01 | firewall02)
+- [1xx - pfSense (firewall01 | firewall02)](#PFSENSE)
   - Instalação pfSense
   - IP Roteamento
   - CARP
   - NAT e Rules
   - IPSEC
   - Hardening e melhores práticas
-  - 
 
-- 2xx - ROTEADORES (internalrouter01 | internalrouter02)
-  - Instalação CentOS 7
+
+- [2xx - ROTEADORES (internalrouter01 | internalrouter02)](#ROTEADORES)
+  - [Instalação CentOS 7](#CENTOS7)
   - IP Roteamento
   - Config IP Forwarding
   - IPTABLES Stateless
   - Hardening and best practices
-  
 
-- 3xx - SRV042 + HAPROXY (srv042)
-  - Instalação CentOS 7
+
+- [3xx - SRV042 + HAPROXY (srv042)](#HAPROXY)
+  - [Instalação CentOS 7](#CENTOS7)
   - IP Roteamento
   - HAProxy 2.5.6
     - Instalação a partir do source-code
     - Configuração (haproxy.conf)
     - Liberar frontend 80 no firewalld
   - Hardening and best practices
-  
 
-- 4xx - SRV042 + CONTAINERS (srv042)
+
+- [4xx - SRV042 + CONTAINERS (srv042)](#CONTAINERS)
   - Instalação Docker e Compose
   - docker-compose.yaml
     - APPGNINX01
@@ -49,8 +49,8 @@ Repositorio material utilizado no desafio.
       - Configuração (/eetc/nginx/conf.d/99-rpopenresty01.conf)
 
 
-- 5xx - DBPGSQL01 (pgsql01)
-  - Instalação CentOS 7
+- [5xx - DBPGSQL01 (pgsql01)](#PGSQL12)
+  - [Instalação CentOS 7](#CENTOS7)
   - IP Roteamento
   - PostegresSQL 12
     - Instalação a partir do repositorio oficial
@@ -61,8 +61,8 @@ Repositorio material utilizado no desafio.
   - Hardening and best practices
 
 
-- 6xx - MONGODB01 (mongodb01)
-  - Instalação CentOS 7
+- [6xx - MONGODB01 (mongodb01)](#MONGODB5)
+  - [Instalação CentOS 7](#CENTOS7)
   - IP Roteamento
   - MongoDB 5
     - Instalação  do repositorio oficial
@@ -76,9 +76,25 @@ Repositorio material utilizado no desafio.
   - Hardening and best practices
 
 
-- 7xx - CLIENTE01 (cliente01)
+- [7xx - CLIENTE01 (cliente01)](#CLIENTE01)
   - Instalação Ubuntu Server
   - IP Roteamento
   - IPSEC
     - Configuração (ipsec.conf)
   - Hardening and best practices
+
+
+## PFSENSE
+
+## CENTOS7
+
+## HAPROXY
+
+## CONTAINERS
+
+## PGSQL12
+
+## MONGODB5
+
+## CLIENTE01
+
