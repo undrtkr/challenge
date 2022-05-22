@@ -11,7 +11,7 @@ sudo -n true
 test $? -eq 0 || exit 1 "Esse script só roda com root!!!"
 
 echo ">> Instalando ferramentas basicas ......"
-while read -r p; do apt-get install -y $p; done < <(
+while read -r p; do yum install -y $p; done < <(
     cat <<"EOF"
     nano
     bash-completion
@@ -29,17 +29,17 @@ echo -e "\n"
 echo ">> Configurando SSHD ......"
 while read -r p; do echo $p >>/etc/ssh/sshd_config; done < <(
     cat <<"EOF"
-    "PermitRootLogin no"
-    "TCPKeepAlive no"
-    "PrintLastLog no"
-    "PrintMotd no"
-    "ClientAliveInterval 300"
-    "LoginGraceTime 30s"
-    "PermitEmptyPasswords no"
-    "HostbasedAuthentication no"
-    "MaxSessions 1"
-    "MaxAuthTries 3"
-    "PermitUserEnvironment no"
+    PermitRootLogin no
+    TCPKeepAlive no
+    PrintLastLog no
+    PrintMotd no
+    ClientAliveInterval 300
+    LoginGraceTime 30s
+    PermitEmptyPasswords no
+    HostbasedAuthentication no
+    MaxSessions 1
+    MaxAuthTries 3
+    PermitUserEnvironment no
 EOF
 )
 sleep 1
@@ -52,12 +52,12 @@ echo -e "\n"
 echo ">> Configurando SYSCTL ......"
 while read -r p; do echo $p >>/etc/sysctl.conf; done < <(
     cat <<"EOF"
-    "net.ipv6.conf.all.disable_ipv6 = 1"
-    "net.ipv6.conf.default.disable_ipv6 = 1"
-    "net.ipv6.conf.default.autoconf = 0"
-    "net.ipv4.tcp_syncookies = 1"
-    "net.ipv4.conf.all.log_martians = 1"
-    "net.ipv4.conf.default.log_martians = 1"
+    net.ipv6.conf.all.disable_ipv6 = 1
+    net.ipv6.conf.default.disable_ipv6 = 1
+    net.ipv6.conf.default.autoconf = 0
+    net.ipv4.tcp_syncookies = 1
+    net.ipv4.conf.all.log_martians = 1
+    net.ipv4.conf.default.log_martians = 1
 EOF
 )
 sleep 1
