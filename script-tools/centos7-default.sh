@@ -26,7 +26,7 @@ sleep 1
 echo "!> OK! ......"
 echo -e "\n"
 
-echo ">> Setup/Hardening do serviço SSHD ......"
+echo ">> Configurando SSHD ......"
 while read -r p; do echo $p >>/etc/ssh/sshd_config; done < <(
     cat <<"EOF"
     "PermitRootLogin no"

@@ -31,6 +31,7 @@ Repositorio material utilizado no desafio.
     - Instalação a partir do source-code
     - Configuração (haproxy.conf)
     - Liberar frontend 80 no firewalld
+  - Configuração rsyslog (rsyslog.conf)
   - Hardening and best practices
 
 - [4xx - SRV042 + CONTAINERS (srv042)](#CONTAINERS)
@@ -111,8 +112,8 @@ A instalação do CentOS 7 segue as premissas a seguir para todas instancias des
 - Fuso horario, linguagem e layout de teclado:
   | Parametro | Valor |
   | :---: | :---: |
-  | Fuso | GMT -3 (Sao Paulo) |
-  | Linguagem SO | EN |
+  | Fuso | America/Sao_Paulo) |
+  | Linguagem SO | EN-US |
   | Layout teclado | PT-BR ABNT2 |
 
 - [Script de configuração inicial](script-tools/centos7-default.sh)
