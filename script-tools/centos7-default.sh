@@ -11,7 +11,8 @@ sudo -n true
 test $? -eq 0 || exit 1 "Esse script só roda com root!!!"
 
 echo ">> Instalando ferramentas basicas ......"
-while read -r p ; do apt-get install -y $p ; done < <(cat << "EOF"
+while read -r p; do apt-get install -y $p; done < <(
+    cat <<"EOF"
     nano
     bash-completion
     net-tools
@@ -26,7 +27,8 @@ echo "!> OK! ......"
 echo -e "\n"
 
 echo ">> Setup/Hardening do serviço SSHD ......"
-while read -r p ; do echo $p >> /etc/ssh/sshd_config ; done < <(cat << "EOF"
+while read -r p; do echo $p >>/etc/ssh/sshd_config; done < <(
+    cat <<"EOF"
     "PermitRootLogin no"
     "TCPKeepAlive no"
     "PrintLastLog no"
@@ -48,7 +50,8 @@ echo "!> OK! ......"
 echo -e "\n"
 
 echo ">> Configurando SYSCTL ......"
-while read -r p ; do echo $p >> /etc/sysctl.conf ; done < <(cat << "EOF"
+while read -r p; do echo $p >>/etc/sysctl.conf; done < <(
+    cat <<"EOF"
     "net.ipv6.conf.all.disable_ipv6 = 1"
     "net.ipv6.conf.default.disable_ipv6 = 1"
     "net.ipv6.conf.default.autoconf = 0"
@@ -86,10 +89,10 @@ echo ">> Configurando Firewall ......"
 firewall-cmd --remove-service dhcpv6-client
 #Regras IPTABLES padrao
 iptables -A INPUT -i lo -j ACCEPT
-iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP 		# Force SYN packets check
-iptables -A INPUT -f -j DROP 		#Force Fragments packets check
-iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP		#XMAS packets
-iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP		# Drop all NULL packets
+iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP # Force SYN packets check
+iptables -A INPUT -f -j DROP                                  #Force Fragments packets check
+iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP          #XMAS packets
+iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP         # Drop all NULL packets
 sleep 1
 echo ">> Salvando e reiniciando o serviço FirewallD / IPTABLES ......"
 service iptables save
@@ -98,19 +101,15 @@ sleep 1
 echo ">> OK! ......"
 echo -e "\n"
 
-
-
-
-
 ##configurar logrotate para serviços
 
-vi /etc/logrotate.d/<arq com nome da pasta>
-ex:
+# vi /etc/logrotate.d/<arq com nome da pasta>
+# ex:
 
-/var/log/firewalld {
-    weekly
-    missingok
-    rotate 4
-    copytruncate
-    minsize 1M
-}
+#/var/log/firewalld {
+#    weekly
+#    missingok
+#    rotate 4
+#    copytruncate
+#    minsize 1M
+#}
