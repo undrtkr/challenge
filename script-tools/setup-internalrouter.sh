@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Script config/install InternalRouters para desafio técnico Firewalls SOFTPLAN
+# Script "setup-internalrouter.sh" para desafio técnico Firewalls SOFTPLAN
 # Escrito por Filipe Cardoso - undrtkr@gmail.com / fpca87@gmail.com
 # revisado em 22/05/2022
 #
@@ -12,7 +12,7 @@ test $? -eq 0 || exit 1 "Esse script só roda com root!!!"
 
 sleep 1
 echo ">> Instalando pacotes ......"
-yum install keepalived iptables-services -y
+yum install keepalived -y
 sleep 1
 echo "!> OK! ......"
 echo -e "\n"
@@ -21,7 +21,7 @@ sleep 1
 echo ">> Removendo FirewallD ......"
 systemctl stop firewalld
 systemctl disable firewalld
-sudo systemctl mask firewalld
+systemctl mask firewalld
 sleep 1
 echo "!> OK! ......"
 echo -e "\n"
@@ -51,9 +51,10 @@ sleep 1
 echo "!> OK! ......"
 echo -e "\n"
 
-
-echo ">> Configuração KEEPALIVED ......"
-cp ../conf/InternalRouter01/keepalived.conf /etc/keepalived
+echo ">> Copiando configuração KEEPALIVED ......"
+mv /etc/keepalived/keepalived.conf /etc/keepalived/keepalived.conf.ori
+cp ../conf/InternalRouter01/keepalived.conf /etc/keepalived/keepalived.master.conf
+cp ../conf/InternalRouter02/keepalived.conf /etc/keepalived/keepalived.backup.conf
 sleep 1
 echo "!> OK! ......"
 echo -e "\n"

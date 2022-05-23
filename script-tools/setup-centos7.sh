@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Script setup inicial SO CentOS 7 para desafio técnico Firewalls SOFTPLAN
+# Script "setup-centos7.sh" para desafio técnico Firewalls SOFTPLAN
 # Escrito por Filipe Cardoso - undrtkr@gmail.com / fpca87@gmail.com
 # revisado em 22/05/2022
 #
@@ -18,12 +18,12 @@ while read -r p; do yum install -y $p; done < <(
     net-tools
     wget
     curl
-    libwww-curl-perl
     lsof
+    iptables-services
 EOF
 )
 sleep 1
-echo "!> OK! ......"
+echo ">> OK! ......"
 echo -e "\n"
 
 echo ">> Configurando SSHD ......"
@@ -46,7 +46,7 @@ sleep 1
 echo ">> Reiniciando o serviço SSHD ......"
 systemctl restart sshd
 sleep 1
-echo "!> OK! ......"
+echo ">> OK! ......"
 echo -e "\n"
 
 echo ">> Configurando SYSCTL ......"
@@ -65,7 +65,7 @@ sleep 1
 echo ">> Aplicando SYSCTL ......"
 sysctl -p
 sleep 1
-echo "!> OK! ......"
+echo ">> OK! ......"
 echo -e "\n"
 sleep 1
 
@@ -74,7 +74,7 @@ mv /etc/securetty /etc/securetty.orig
 touch /etc/securetty
 chmod 600 /etc/securetty
 sleep 1
-echo "!> OK! ......"
+echo ">> OK! ......"
 echo -e "\n"
 sleep 1
 
@@ -87,19 +87,24 @@ sleep 1
 
 echo ">> Configurando Firewall ......"
 firewall-cmd --remove-service dhcpv6-client
-#Regras IPTABLES padrao
+
 iptables -A INPUT -i lo -j ACCEPT
-iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP # Force SYN packets check
-iptables -A INPUT -f -j DROP                                  #Force Fragments packets check
-iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP          #XMAS packets
-iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP         # Drop all NULL packets
+iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
+iptables -A INPUT -f -j DROP
+iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
+iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP
 sleep 1
+
 echo ">> Salvando e reiniciando o serviço FirewallD / IPTABLES ......"
 service iptables save
 systemctl restart firewalld
 sleep 1
 echo ">> OK! ......"
 echo -e "\n"
+
+echo ">> SETUP CONCLUIDO! ......"
+echo -e "\n"
+
 
 ##configurar logrotate para serviços
 
