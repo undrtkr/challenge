@@ -127,11 +127,7 @@ echo "!> OK! ......"
 echo -e "\n"
 
 echo ">> Liberar service no firewalld ......"
-firewall-cmd --new-zone=mongodb --permanent
-firewall-cmd --zone=mongodb --add-source=10.20.30.0/24 --permanent
-firewall-cmd --zone=mongodb --add-source=192.168.172/28 --permanent
-firewall-cmd --zone=mongodb --add-port=27017/tcp --permanent
-firewall-cmd --reload
+firewall-cmd --add-rich-rule 'rule family="ipv4" service name="mongodb" source address="192.168.172.0/28" accept'
 
 echo "AllowZoneDrifting=no" >> /etc/firewalld/firewalld.conf
 

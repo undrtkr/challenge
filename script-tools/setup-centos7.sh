@@ -19,7 +19,6 @@ while read -r p; do yum install -y $p; done < <(
     wget
     curl
     lsof
-    iptables-services
 EOF
 )
 sleep 1

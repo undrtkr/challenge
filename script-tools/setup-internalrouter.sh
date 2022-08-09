@@ -26,9 +26,9 @@ sleep 1
 echo "!> OK! ......"
 echo -e "\n"
 
-echo ">> Habilitando serviços ......"
-systemctl enable keepalived
-systemctl enable iptables
+echo ">> Habilitando IP Forwarding ......"
+echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+sysctl -p
 sleep 1
 echo "!> OK! ......"
 echo -e "\n"
@@ -59,7 +59,9 @@ sleep 1
 echo "!> OK! ......"
 echo -e "\n"
 
-echo ">> Reiniciando os serviços ......"
+echo ">> Habilitando e reiniciando os serviços ......"
+systemctl enable keepalived
+systemctl enable iptables
 systemctl restart keepalived
 systemctl restart iptables
 sleep 1

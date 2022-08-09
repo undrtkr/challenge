@@ -31,7 +31,7 @@ while read -r p; do echo $p >>/var/lib/pgsql/12/data/postgresql.conf; done < <(
     cat <<"EOF"
     hba_file = '/var/lib/pgsql/12/data/pg_hba.conf'
     listen_address = '*'
-    authentication_timeout = 1min
+    authentication_timeout = 30s
     password_encryption = scram-sha-256
 EOF
 )
